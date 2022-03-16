@@ -23,18 +23,25 @@ const requestListener = async function( request, response){
                     data += chunk;
                 })
                 request.on('end', async () => {
-                    info = JSON.parse(data);
-                    if("author" in info && "category" in info && "title" in info){
-                        let db_answer =  await db_manager.addNewBook(info.title, info.author, info.category);
-                        response.setHeader("Location", "/books/"+db_answer);
-                        response.statusCode = 201;
-                        response.write(JSON.stringify(info));
-                        response.end();
-
-                        
-                    }else{
+                    try{
+                        info = JSON.parse(data);
+                        if("author" in info && "category" in info && "title" in info){
+                            let db_answer =  await db_manager.addNewBook(info.title, info.author, info.category);
+                            response.setHeader("Location", "/books/"+db_answer);
+                            response.statusCode = 201;
+                            response.write(JSON.stringify(info));
+                            response.end();
+    
+                            
+                        }else{
+                            response.statusCode = 400;
+                            response.write(JSON.stringify({'error' : 'One or more fields are missing!'}));
+                            response.end();
+                        }
+                    }
+                    catch(error){
                         response.statusCode = 400;
-                        response.write(JSON.stringify({'error' : 'One or more fields are missing!'}));
+                        response.write(JSON.stringify({'error' : 'Message is not JSON!'}));
                         response.end();
                     }
                 });
@@ -86,6 +93,7 @@ const requestListener = async function( request, response){
                     data += chunk;
                 })
                 request.on('end', async () => {
+                    try{
                     info = JSON.parse(data);
                     console.log(info);
                     if("author" in info && "category" in info && "title" in info){
@@ -104,6 +112,12 @@ const requestListener = async function( request, response){
                     }else{
                         response.statusCode = 400;
                         response.write(JSON.stringify({'error' : 'One or more fields are missing!'}));
+                        response.end();
+                    }}
+                    catch(error)
+                    {
+                        response.statusCode = 400;
+                        response.write(JSON.stringify({'error' : 'Message is not JSON!'}));
                         response.end();
                     }
                 });
