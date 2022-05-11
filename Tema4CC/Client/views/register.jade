@@ -1,0 +1,77 @@
+doctype html
+html(lang='en')
+  head
+    title=title
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+
+    link(rel='icon', type='image/png', href='images/icons/favicon.ico')
+    script(src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit',async='',defer='')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/bootstrap/css/bootstrap.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='fonts/font-awesome-4.7.0/css/font-awesome.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/animate/animate.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/css-hamburgers/hamburgers.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/animsition/css/animsition.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/select2/select2.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/daterangepicker/daterangepicker.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='css/util.css')
+    link(rel='stylesheet', type='text/css', href='css/main.css')
+    // ===============================================================================================
+  
+
+    body
+    .limiter
+        .container-login100
+            .wrap-login100
+                form.login100-form.validate-form.p-l-55.p-r-55.p-t-178(action='/register', method='post')
+                    span.login100-form-title    Register
+                    .m-b-12.error=username
+                    .wrap-input100.validate-input.m-b-16(data-validate='Please enter username')
+                        input.input100(type='text', name='username', placeholder='Username')
+                        span.focus-input100
+                    
+                    .m-b-12.error=email
+                    .wrap-input100.validate-input.m-b-16(data-validate='Please enter e-mail')
+                        input.input100(type='text', name='email', placeholder='E-mail')
+                        span.focus-input100
+                    
+                    .m-b-12.error=password
+                    .wrap-input100.validate-input.m-b-16(data-validate='Please enter password')
+                        input.input100(type='password', name='password', placeholder='Password')
+                        span.focus-input100
+                    
+                    .m-b-12.error=password_confirmation
+                    .wrap-input100.validate-input.m-b-16(data-validate='Please confirm the password')
+                        input.input100(type='password', name='password_confirmation', placeholder='Password confirmation')
+                        span.focus-input100
+
+                    #g-recaptcha(data-callback='recaptchaCallback')
+
+                    .container-login100-form-btn.p-t-20
+                        button.login100-form-btn(disabled=true)    Sign up
+                    .flex-col-c.p-t-100.p-b-40
+                        span.txt1.p-b-9   Already have an account?
+                        a.txt3(href='/login')    Sign in here
+
+    script.
+        var buttonDisabled = true;
+        var onloadCallback = function() {
+            grecaptcha.render('g-recaptcha', {
+              'sitekey' : '6LcxeyEfAAAAAFUpPLPGxXY6Xr8ig-dovESadtgJ'
+            });
+        };
+
+        function recaptchaCallback() {
+            document.querySelector('button').disabled = false;
+        };
+
+
+

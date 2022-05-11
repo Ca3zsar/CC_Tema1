@@ -1,0 +1,103 @@
+doctype html
+html(lang='en')
+  head
+    title=title
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+
+    link(rel='icon', type='image/png', href='images/icons/favicon.ico')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/bootstrap/css/bootstrap.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='fonts/font-awesome-4.7.0/css/font-awesome.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/animate/animate.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/css-hamburgers/hamburgers.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/animsition/css/animsition.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/select2/select2.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/daterangepicker/daterangepicker.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='css/util.css')
+    link(rel='stylesheet', type='text/css', href='css/main.css')
+    // ===============================================================================================
+  
+    link(rel='stylesheet', type='text/css', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css')
+
+    body
+    .limiter
+        .container-login100
+            .wrap-login100
+                .login100-form.validate-form.p-l-55.p-r-55.p-t-178
+                    .container-login100-form-btn.p-t-20.m-b-16
+                            button.login100-form-btn    Translate in Romanian &nbsp
+                                i.fa-solid.fa-language
+                    span.login100-form-title    Tweets
+                    
+
+                    p.m-b-16='First 3 tweets by: #' + hashtag
+
+                    each val in [0, 1, 2]
+                        .error.m-b-16=data[val]
+
+    script.
+
+        var api = 'https://tweet-translate.azurewebsites.net/api/tweet-translate';
+
+
+        document.querySelector('button').addEventListener('click', function() {
+            translate();
+        });
+
+        function translate() {
+            tweets = getTweetsList();
+            tweets = sanitize(tweets);
+
+
+            jsonTest = {
+                        "messages": tweets,
+                        "target" : "ro"
+                    }
+
+            fetch(api, {
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify(jsonTest)
+            })
+            .then(response => response.json())
+            .then(data=>{
+                var matches = document.querySelectorAll('.error.m-b-16');
+                array = data.translated_texts;
+
+                var i = 0;
+                matches.forEach(function(match) {
+                    match.innerText = array[i];
+                    i = i + 1;
+                });
+            })
+        }
+
+        function getTweetsList() {
+            var matches = document.querySelectorAll('.error.m-b-16');
+            var array = []
+            matches.forEach(function(match) {
+                var tweet = match.innerHTML;
+                array.push(tweet);
+            });
+            return array;
+        };
+
+        function sanitize(tweets) {
+            var array = []
+            tweets.forEach(function(tweet) {
+                var tweet = tweet.replace(/@[A-Za-z0-9_]+/g, "");
+                tweet = tweet.replace(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g, "");
+
+                array.push(tweet);
+            });
+            return array;
+        };
+    

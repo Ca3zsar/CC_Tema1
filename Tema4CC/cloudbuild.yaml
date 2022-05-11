@@ -1,0 +1,17 @@
+steps:
+- name: node:16
+  entrypoint: npm
+  dir: ./Client
+  args: ['install']
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy", "client.yaml"]
+  dir: ./Client
+- name: python
+  entrypoint: pip
+  args: ["install", "-r", "requirements.txt"]
+  dir: ./API
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy", "api.yaml"]
+  dir: ./API
+options:
+ logging: CLOUD_LOGGING_ONLY
