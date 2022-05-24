@@ -1,0 +1,71 @@
+<div class="shadow container mb-5 joke-div">
+    <div class="card dropdown" style="width: 100%;">
+        <div class="card-header header-div">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        Author: {{author}}
+                    </div>
+                    <div class="col-sm text-right">
+                        {{createdAt}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h2 class="card-text">Title : {{title}}</h2>
+                    <h3 class="card-text joke-text" style="white-space: pre-line;">{{content}}</h3>
+                </div>
+                <div class="col" *ngIf="photo_url">
+                    <img class="img-fluid float-right" style="width: 30vh;" alt="eh" src="{{photo_url}}">
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer text-muted">
+            <div class="row  gx-5 footer-row">
+                <div class="footer-column">
+                    <div class="row">
+                        <div class="react-col">
+                            <span class="px-2"> {{votes.catOk_count}} </span>
+                            <img (click)="triggerVote('catOk')" id="catOk_{{joke_key}}" class="img-fluid react-img"
+                                alt="eh"
+                                src="https://cdn.betterttv.net/emote/6137a8e1af28e956864c6cfc/3x">
+                        </div>
+                        <div class="react-col">
+                            <span class="px-2"> {{votes.laugh_count}} </span>
+                            <img (click)="triggerVote('laugh')" id="laugh_{{joke_key}}" class="img-fluid react-img"
+                                alt="eh"
+                                src="https://cdn.betterttv.net/emote/5e9c4ae9ce7cbf62fe153803/3x">
+                        </div>
+                        <div class="react-col">
+                            <span class="px-2"> {{votes.dislike_count}} </span>
+                            <img (click)="triggerVote('dislike')" id="dislike_{{joke_key}}" class="img-fluid react-img"
+                                alt="eh"
+                                src="https://cdn.betterttv.net/emote/60c8c85cf8b3f62601c3e2c3/3x">
+                        </div>
+                        <button type="button" class="btn button-blue comm-btn" data-toggle="modal"
+                            [attr.data-target]="'#modal' + joke_key">
+                            Comments
+                        </button>
+
+                        <button type="button" class="btn btn-danger comm-btn" style="margin-left: 0.1em;">
+                            Report
+                        </button>
+
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <div class="d-flex float-right flex-row bd-highlight mb-3  tags-column" *ngFor="let key of keys">
+                        <div class="p-2 bd-highlight ">#{{key}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<app-comments-dialog [joke_id]="joke_key" ngDefaultControl #comments></app-comments-dialog>

@@ -1,0 +1,3 @@
+<div class="container-fluid" *ngFor="let joke of filteredJokes;index as i">
+      <app-joke [jsonString]="joke" ngDefaultControl #jokeComponent></app-joke>
+</div>

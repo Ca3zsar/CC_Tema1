@@ -1,0 +1,64 @@
+<div class="container" *ngIf="event">
+    <h1 style="text-align:center;margin-top: 25px;">Active events</h1>
+    <header class="jumbotron main-feed">
+        <div class="shadow container mb-5 joke-div">
+            <div class="card dropdown" style="width: 100%;">
+                <div class="card-header header-div">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                Title of the event : {{event.name}}    
+                            </div>
+                            <div class="col-sm text-right">
+                                Date started : {{event.date}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="card-text joke-text" style="white-space: pre-line;">Write jokes with respect to the following topic : <b>{{event.topic}}</b></h3>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="card-footer text-muted entries-area">
+                    <h1 style="text-align: center;">Entries</h1>
+                    <div class="modal-dialog modal-lg entries-list" role="document">
+                        <div class="modal-content">
+                          <div class="modal-body">
+                              <form>
+                                  <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Add an entry:</label>
+                                    <textarea ngDefaultControl class="form-control" #commArea></textarea>
+                                    <button (click)="sendEntry()" type="button" class="btn btn-primary send-comment button-blue">Send text</button>
+                                  </div>
+                                </form>
+                              <hr>
+                              <div class="container justify-content-center mt-5 border-left border-right">
+                                    <div class="card card-spacing" *ngFor="let comment of event.entries">
+                                      <div class="card-header header-div">
+                                        {{comment["author"]}}
+                                      </div>
+                                      <div class="card-body comment-text">
+                                        <blockquote class="blockquote mb-0">
+                                          <p>{{comment['text']}}</p>
+                                        </blockquote>
+                                      </div>
+                                    </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+        
+    </header>
+    
+</div>
+
+<div class="container" *ngIf="event == ''">
+    <h1 style="text-align:center;margin-top:20px">No active event at this moment!</h1>
+</div>

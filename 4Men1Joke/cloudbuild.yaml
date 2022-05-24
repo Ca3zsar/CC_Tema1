@@ -1,0 +1,28 @@
+steps:
+ # Build the container image
+ - name: 'gcr.io/cloud-builders/docker'
+   args: ['build', '-t', 'gcr.io/man1joke/github.com/ca3zsar/4men1joke:$COMMIT_SHA', 'Client/']
+ # Push the container image to Container Registry
+ - name: 'gcr.io/cloud-builders/docker'
+   dir: '/Client'
+   args: ['push', 'gcr.io/man1joke/github.com/ca3zsar/4men1joke:$COMMIT_SHA']
+ # Deploy container image to Cloud Run
+ - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+   entrypoint: gcloud
+   args:
+   - 'run'
+   - 'deploy'
+   - 'jokes-frontend'
+   - '--image'
+   - 'gcr.io/man1joke/github.com/ca3zsar/4men1joke:$COMMIT_SHA'
+   - '--region'
+   - 'europe-central2'
+ - name: python
+   entrypoint: pip
+   args: ["install", "-r", "requirements.txt"]
+   dir: ./API
+ - name: "gcr.io/cloud-builders/gcloud"
+   args: ["app", "deploy", "api.yaml"]
+   dir: ./API
+images:
+ - 'gcr.io/man1joke/github.com/ca3zsar/4men1joke:$COMMIT_SHA'

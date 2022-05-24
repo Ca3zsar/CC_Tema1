@@ -1,0 +1,92 @@
+.big-row{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.filter-area {
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.filter-text {
+    font-weight: bold;
+    text-align: center;
+}
+
+:host ::ng-deep .multiselect-dropdown .dropdown-btn {
+    padding: 6px 30px 6px 12px !important;
+}
+
+:host ::ng-deep .multiselect-dropdown .dropdown-btn .selected-item {
+    border: 1px solid rgb(0,0,26) !important;
+    background: rgb(0,0,26) !important;
+}
+
+:host ::ng-deep .multiselect-item-checkbox input[type='checkbox']:focus + div:before, .multiselect-item-checkbox input[type='checkbox']:hover + div:before {
+    border-color: rgb(0,0,26) !important;
+}
+
+:host ::ng-deep .multiselect-item-checkbox input[type='checkbox'] + div:before {
+    color: rgb(0,0,26) !important;
+    border: 2px solid rgb(0,0,26) !important;
+}
+
+:host ::ng-deep .multiselect-item-checkbox input[type='checkbox'] + div:after {
+    background-color: transparent !important;
+}
+
+:host ::ng-deep .multiselect-item-checkbox input[type='checkbox']:checked + div:before {
+    background: rgb(0,0,26) !important;
+}
+
+@keyframes borderscale {
+    50% {
+        box-shadow: 0 0 0 2px rgb(0,0,26) !important;
+   }
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: rgb(0,0,26);
+  }
+
+.filters-row{
+    align-items: center;
+}
+
+.has-image{
+    margin-left:15px;
+}
+
+:host ::ng-deep label{
+    margin-bottom: 0 !important;
+}
+
+.author-input{
+    margin-left:15px;
+    max-width:10vw;
+}
+
+.sorter{
+    border: 1px solid rgb(225, 219, 219);
+    background-color: white;
+    height: auto;
+    padding:6px 30px 6px 12px;
+}
+
+@media (max-width: 768px) {
+    .filter-area {
+        font-size:12px !important;
+    }
+
+    ::ng-deep .author-input{
+        font-size:12px;
+    }
+
+    .big-row .column{
+        width:100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

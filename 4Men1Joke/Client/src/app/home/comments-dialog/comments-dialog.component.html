@@ -1,0 +1,37 @@
+
+<!-- Modal -->
+<div class="modal fade" id="modal{{joke_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>Comments</h1>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Add comment:</label>
+                  <textarea ngDefaultControl class="form-control" id="textarea{{joke_id}}"></textarea>
+                  <button (click)="sendComment()" type="button" class="btn btn-primary send-comment">Send message</button>
+                </div>
+              </form>
+            <hr>
+            <div class="container justify-content-center mt-5 border-left border-right">
+                  <div class="card card-spacing" *ngFor="let comment of commentsList">
+                    <div class="card-header">
+                      {{comment['username']}}
+                    </div>
+                    <div class="card-body">
+                      <blockquote class="blockquote mb-0">
+                        <p>{{comment['comment']}}</p>
+                        <footer class="blockquote-footer">Date:<cite title="Source Title">{{comment['createdAt']}}</cite></footer>
+                      </blockquote>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,59 @@
+<div *ngIf="isLoggedIn" class="post-body">
+    <!-- center the div-->
+    <div class="card w-75">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs pull-right" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="text-tab" data-toggle="tab" href="#text" role="tab"
+                        aria-controls="text" aria-selected="true">Text</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="image-tab" data-toggle="tab" href="#image" role="tab" aria-controls="image"
+                        aria-selected="false">Image</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card-body">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="text" role="tabpanel" aria-labelledby="text-tab">
+                    <div [formGroup]="post_form" class="form-group">
+                        <label for="titleInput">Title of the post</label>
+                        <input formControlName="title" class="form-control" id="titleInput" placeholder="Enter title">
+                        <span class="text-danger"
+                            *ngIf="post_form.controls['title'].hasError('required') && (post_form.controls['title'].dirty || post_form.controls['title'].touched)">This
+                            field is required</span>
+                        <br>
+                        <label for="postContent">Enter the text of the joke</label>
+                        <textarea formControlName="content" class="form-control" id="postContent" rows="3"></textarea>
+                        <span class="text-danger"
+                            *ngIf="post_form.controls['content'].hasError('required') && (post_form.controls['content'].dirty || post_form.controls['content'].touched)">This
+                            field is required</span>
+                    </div>
+                    <div class="row tags-row">
+                        Tags :
+                        <div class="tag-wrapper" *ngFor="let tag of selectedTags">
+                            <span class="badge badge-pill badge-dark tag">{{tag}}</span>
+                        </div>
+                        <div class="tag-selector-div">
+                            <select id="selector" (change)="addNewTag()" [(ngModel)]="selectedOption"
+                                class="form-select-color form-select-sm selector" aria-label=".form-select-sm example">
+                                <option value="Choose a tag" default selected>Choose a tag</option>
+                                <option class="tag-option" *ngFor="let option of listOfTags" value={{option}}>{{option}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div *ngIf="validationError && selectedTags.length == 0" class="row tags-row"><span
+                            style="color:red">Select at least one tag!</span></div>
+                </div>
+
+                <div class="tab-pane fade" id="image" role="tabpanel" aria-labelledby="image-tab">
+                    <app-file-upload #imageUploader></app-file-upload>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" (click)="submitPost()">Post</button>
+        </div>
+    </div>

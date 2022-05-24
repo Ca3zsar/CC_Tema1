@@ -1,0 +1,101 @@
+.header-div {
+    background-color: rgb(0, 0, 26);
+    color: white;
+    font-weight: bold;
+}
+
+.send-comment {
+    margin-top: 25px;
+}
+
+.card-spacing {
+    margin-bottom: 25px;
+}
+
+.joke-div {
+    max-width: 960px;
+    padding-left: 0%;
+    padding-right: 0%;
+}
+
+.tags-column {
+    font-weight: bold;
+    margin-bottom: 0 !important;
+}
+
+.button-blue {
+    background-color: rgb(0, 0, 26);
+    color: white;
+}
+
+.footer-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.footer-column:first-child {
+    width: auto;
+}
+
+.footer-column .react-col:first-of-type {
+    margin-left: 20px;
+}
+
+.footer-column .react-col:not(:first-child) {
+    margin-left: 10px;
+}
+
+.footer-column .react-col:last-of-type {
+    margin-right: 20px;
+}
+
+.footer-column .react-col {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.comm-btn {
+    margin-right: 15px;
+}
+
+.react-img {
+    width: 32px;
+    height: 32px;
+}
+
+@media (max-width: 1020px) {
+    .comm-btn {
+        font-size: 0.75em;
+    }
+
+    .tags-column {
+        font-size: 12px;
+    }
+
+    .react-img {
+        height: 24px;
+        width: 24px;
+    }
+
+    .joke-text{
+        font-size: 12px;
+    }
+}
+
+@media (max-width:500px)
+{
+    .comm-btn {
+        font-size: 0.6em;
+    }
+
+    .tags-column {
+        font-size: 11px;
+    }
+
+    .react-img {
+        height: 16px;
+        width: 16px;
+    }
+}

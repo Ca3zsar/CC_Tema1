@@ -1,0 +1,23 @@
+<div class="container filter-area">
+  <div class="row big-row">
+    <div class="column">
+      <p class="filter-text">Filter by:</p>
+      <div class="row filters-row">
+        <ng-multiselect-dropdown [settings]="dropdownSettings" [placeholder]="'Select tags'" [data]="tags"
+          [(ngModel)]="selectedItems" (onSelect)="emit()" (onSelectAll)="emit()" (onDeSelect)="emit()" (onDeSelectAll)="emit()">
+        </ng-multiselect-dropdown>
+        <input class="form-control author-input" id="authorInput" placeholder="Enter author" (change)="checkText($event)" >
+        <mat-checkbox [(ngModel)]="isChecked" class="has-image" (change)="emit()">Has image?</mat-checkbox>
+      </div>
+    </div>
+    <div class="column" >
+      <p class="filter-text">Sort by</p>
+      <select id="sorter" class="form-select-color form-select-sm sorter" aria-label=".form-select-sm example" [(ngModel)]="sortingCriteria" (change)="emit()">
+        <option value="date asc" selected>Date asc</option>
+        <option value="date desc" >Date desc</option>
+        <option value="relevance">Relevance</option>
+        <option value="laughs">Laughs</option>
+      </select>
+    </div>
+  </div>
+</div>

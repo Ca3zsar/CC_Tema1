@@ -1,0 +1,27 @@
+<div class="container" *ngIf="isLoggedIn">
+  <header class="jumbotron main-feed">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 ">
+             <div class="list-group ">
+                  <a (click)="toggleComponent(1)" [ngClass]="component_flag == 1?'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action' ">Dashboard</a>
+                  <a (click)="toggleComponent(2)" [ngClass]="component_flag == 2?'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action' ">Posts</a>
+                  <a (click)="toggleComponent(3)" [ngClass]="component_flag == 3?'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action' ">Comments</a>
+                  <a (click)="toggleComponent(4)" [ngClass]="component_flag == 4?'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action' ">Awards</a>
+                </div> 
+        </div>
+        <div class="col-md-9">
+          <app-dashboard [email]="email" [username]="username" *ngIf="component_flag == 1"></app-dashboard>
+          <app-posts *ngIf="component_flag == 2"></app-posts>
+          <app-comments *ngIf="component_flag == 3"></app-comments>
+          <app-awards *ngIf="component_flag == 4"></app-awards>
+        </div>
+
+      </div>
+    </div>
+  </header>
+</div>
+
+<ng-template #loggedOut>
+  Please login.
+</ng-template>

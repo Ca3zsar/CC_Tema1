@@ -1,0 +1,52 @@
+<div class="modal fade" id="modal{{joke_key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>{{title}}</h1>
+        </div>
+        <div class="modal-body">
+            <div class="container mb-3">
+                <div class="card dropdown" style="width: 100%;">
+                    <div class="card-header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    Author: {{author}}
+                                </div>
+                                <div class="col-sm text-right">
+                                    {{createdAt}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h3 class="card-text">{{content}}</h3>
+                            </div>
+                            <div class="col" *ngIf="photo_url">
+                                <img class="img-fluid float-right" style="width: 30vh;" alt="eh" src="{{photo_url}}" >
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="card-footer text-muted">
+                        <div class="row  gx-5">
+                            
+                            <div class="col">
+                                <div class="d-flex float-right flex-row bd-highlight mb-3" *ngFor="let key of keys">
+                                    <div class="p-2 bd-highlight">#{{key}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <app-comments-dialog [joke_id]="joke_key"></app-comments-dialog> -->
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,20 @@
+<div class="container justify-content-center mt-5 border-left border-right">
+    <div class="card card-spacing mb-5" *ngFor="let comment of commentsList">
+      <div class="card-header">
+        {{comment['username']}}
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p>{{comment['comment']}}</p>
+          <footer class="blockquote-footer">Date:<cite title="Source Title">{{comment['createdAt']}}</cite></footer>
+        </blockquote>
+      </div>
+      <div class="card-footer">
+        <button type="button" class="btn btn-primary" data-toggle="modal"  [attr.data-target]="'#modal' + comment['joke_id']">
+          Preview post
+        </button>
+      </div>
+
+      <app-preview [jsonString]="comment['joke']"></app-preview>
+    </div>
+</div> 

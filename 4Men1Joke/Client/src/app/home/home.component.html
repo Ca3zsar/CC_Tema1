@@ -1,0 +1,8 @@
+<div class="container">
+  <header class="jumbotron main-feed">
+    <h1 style="text-align: center; "  *ngIf="event">There is an active <a href="\event">event</a> </h1>
+    <app-filter (emitter)="send($event)"></app-filter>
+    <hr>
+    <app-jokefeed [options]="options"></app-jokefeed>
+  </header>
+</div>

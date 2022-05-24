@@ -1,0 +1,49 @@
+<div class="col-md-12">
+    <div class="card card-container">
+      <img
+        id="profile-img"
+        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        class="profile-img-card"
+      />
+      <form
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="form-group">
+          <label for="verification_code">Verification code</label>
+          <input
+            type="text"
+            class="form-control"
+            name="verification_code"
+            [(ngModel)]="form.verification_code"
+            required
+            #username="ngModel"
+          />
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="username.errors && f.submitted"
+          >
+            Verification code is required!
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-block">
+            Validate
+          </button>
+        </div>
+        <div class="form-group">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && isValidateFailed"
+          >
+            Verification code error: {{ errorMessage }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
